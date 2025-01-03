@@ -13,6 +13,19 @@ public class SceneController : MonoBehaviour
 {
     private Save save;
     private Wallet wallet;
+    private float _volume = 1;
+    private float volume
+    {
+        get
+        {
+            return _volume;
+        }
+        set
+        {
+            _volume = value;
+            AudioListener.volume = value;
+        }
+    }
 
     //gameplay
     [SerializeField] private MyUI myUI;
@@ -114,6 +127,7 @@ public class SceneController : MonoBehaviour
     void Start()
     {
         save = new Save();
+        volume = save.volume;
         wallet = new Wallet(save);
         store = new Store(wallet, save);
         
@@ -125,6 +139,7 @@ public class SceneController : MonoBehaviour
         myUI.wallet = wallet;
         myUI.resetButtonPressed += resetPressed;
         myUI.squareSliderChanged += store.squareSliderChanged;
+        myUI.updateVolume += updateVolume;
         prestigeUI.setWalletAndStore(wallet, store);
 
         instrumentDropdown.value = save.instrument;
@@ -154,6 +169,7 @@ public class SceneController : MonoBehaviour
         save.octave = octaveIndex;
         save.bonkBucks = wallet.bonkBucks;
         save.prestigeBucks = wallet.prestigeBucks;
+        save.volume = volume;
 
         save.echoSquares = store.echoSquaresPurchased;
         save.instruments = store.instrumentsPurchased;
@@ -169,6 +185,11 @@ public class SceneController : MonoBehaviour
     {
         resetBoard();
         resetSave();
+    }
+
+    private void updateVolume(object sender, float value)
+    {
+        volume = value;
     }
 
     private void resetSave()
@@ -399,7 +420,7 @@ public class SceneController : MonoBehaviour
                 if (store.echoSquaresPurchased)
                 {
                     squareScript echoSquareScript = echoSquares[i].transform.GetComponent<squareScript>();
-                    echoSquareScript.echoAnimation();
+                    echoSquareScript.echoAnimation(false, true);
                 }
                 
                 if (goingDown)

@@ -24,5 +24,10 @@ public class SliderDrag : MonoBehaviour, IPointerUpHandler
             Debug.Log("change # of squares");
             myUI.numberOfSquaresSliderChanged((int)GetComponent<Slider>().value);
         }
+        else if (transform.name == "volume")
+        {
+            Debug.Log("volume");
+            myUI.volumeSliderChanged(GetComponent<Slider>().value);
+        }
     }
 }

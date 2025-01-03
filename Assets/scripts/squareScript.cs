@@ -182,10 +182,10 @@ public class squareScript : MonoBehaviour
         col.color = gradient;
     }
 
-    public void echoAnimation()
+    public void echoAnimation(bool playExplosionParticle = true, bool playCreationParticle = true)
     {
         //staticParticleSystem.Stop();
-        flash();
+        flash(playExplosionParticle, playCreationParticle);
         //creationParticleObject.GetComponent<ParticleSystem>().Play();
     }
 

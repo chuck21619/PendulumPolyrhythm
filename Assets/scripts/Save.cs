@@ -11,6 +11,7 @@ public class Save
     const string instrumentIndexKey = "instrumentIndex";
     const string scaleKey = "scale";
     const string octaveKey = "octave";
+    const string volumeKey = "volume";
 
     const string echoSquaresKey = "echoSquares";
     const string autoPurchaseSquaresKey = "autoPurchaseSquares";
@@ -53,6 +54,18 @@ public class Save
         set
         {   
             PlayerPrefs.SetInt(numberOfSquaresKey, value);
+        }
+    }
+
+    public float volume
+    {
+        get
+        {
+            return PlayerPrefs.GetFloat(volumeKey, 1);
+        }
+        set
+        {
+            PlayerPrefs.SetFloat(volumeKey, value);
         }
     }
 

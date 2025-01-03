@@ -17,6 +17,7 @@ public class MyUI : MonoBehaviour
         {
             _save = value;
             octaveSlider.value = save.octave;
+            volumeSlider.value = save.volume;
         }
     }
 
@@ -63,6 +64,7 @@ public class MyUI : MonoBehaviour
     [SerializeField] TMP_Dropdown scalesDropdown;
     [SerializeField] private Slider speedSlider;
     [SerializeField] private Slider octaveSlider;
+    [SerializeField] private Slider volumeSlider;
     [SerializeField] private Slider numberOfSqauresSlider;
     [SerializeField] private TMP_Text bonkBucksLabel;
     [SerializeField] private TMP_Text bonkBucksAmountLabel;
@@ -88,6 +90,7 @@ public class MyUI : MonoBehaviour
     
     public event EventHandler resetButtonPressed;
     public event EventHandler<int> squareSliderChanged;
+    public event EventHandler<float> updateVolume;
     [SerializeField] private GameObject confirmationPrefab;
     GameObject confirmationDialog;
 
@@ -166,6 +169,11 @@ public class MyUI : MonoBehaviour
     public void numberOfSquaresSliderChanged(int value)
     {
         squareSliderChanged?.Invoke(this, value);
+    }
+
+    public void volumeSliderChanged(float value)
+    {
+        updateVolume?.Invoke(this, value);
     }
 
     public void buySquarePressed()
