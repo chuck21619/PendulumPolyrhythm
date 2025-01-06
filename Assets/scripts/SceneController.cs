@@ -126,6 +126,7 @@ public class SceneController : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 100;
         save = new Save();
         volume = save.volume;
         wallet = new Wallet(save);
